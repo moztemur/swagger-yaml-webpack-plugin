@@ -1,10 +1,9 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable security/detect-non-literal-fs-filename */
+/* eslint-env es6 */
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const merge = require("lodash.merge");
-const InjectPlugin = require("webpack-inject-plugin").default;
+const webpack = require("webpack");
 
 class SwaggerYamlWebpackPlugin {
   constructor(config) {
@@ -22,10 +21,9 @@ class SwaggerYamlWebpackPlugin {
         )
       );
     });
-    const globalAssignment = `global.${this.config.varName} = ${JSON.stringify(
-      output
-    )};`;
-    new InjectPlugin(() => globalAssignment).apply(compiler);
+    new webpack.DefinePlugin({
+      [this.config.varName]: JSON.stringify(output)
+    }).apply(compiler);
   }
 }
 

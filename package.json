@@ -3,15 +3,46 @@
   "version": "0.0.1",
   "description": "A Webpack plugin to inject Swagger yaml definitions into the Node.js bundle as global JSON object at compile time in order to serve as desired like through REST API",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
-  },
-  "keywords": ["webpack", "plugin", "swagger", "yaml", "node"],
+  "keywords": [
+    "webpack",
+    "plugin",
+    "swagger",
+    "yaml",
+    "node"
+  ],
   "author": "Mahmut Oztemur",
+  "homepage": "https://github.com/moztemur/swagger-yaml-webpack-plugin",
+  "bugs": "https://github.com/moztemur/swagger-yaml-webpack-plugin/issues",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moztemur/swagger-yaml-webpack-plugin.git"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "lint": "eslint .",
+    "commitlint": "commitlint -E HUSKY_GIT_PARAMS",
+    "release": "standard-version",
+    "cm": "git-cz"
+  },
   "dependencies": {
     "js-yaml": "^3.13.1",
-    "lodash.merge": "^4.6.2",
-    "webpack-inject-plugin": "^1.5.3"
+    "lodash.merge": "^4.6.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/npm": "^5.3.5",
+    "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^6.8.0",
+    "husky": "^3.1.0",
+    "semantic-release": "^15.14.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
