@@ -11,6 +11,7 @@ class SwaggerYamlWebpackPlugin {
   }
 
   apply(compiler) {
+    console.log('Swagger Yaml processing started');
     const filenames = fs.readdirSync(this.config.directory);
     const output = {};
     filenames.forEach(filename => {
@@ -24,6 +25,7 @@ class SwaggerYamlWebpackPlugin {
     new webpack.DefinePlugin({
       [this.config.varName]: JSON.stringify(output)
     }).apply(compiler);
+    console.log('Swagger Yaml processing finished');
   }
 }
 
