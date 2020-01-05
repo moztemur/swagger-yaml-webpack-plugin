@@ -1,0 +1,34 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - run: echo "${{ github.event.head_commit.message }}"
+
+  publish:
+    needs: prepare
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+
+      - name: install
+        run: npm ci
+
+      - name: semantic-release
+        run: npx semantic-release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
