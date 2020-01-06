@@ -1,6 +1,6 @@
 # Swagger Yaml Webpack Plugin #
 
-![npm](https://img.shields.io/npm/v/swagger-yaml-webpack-plugin.svg) ![travis](https://img.shields.io/travis/mhmtztmr/react-dialpad.svg)
+![npm](https://img.shields.io/npm/v/swagger-yaml-webpack-plugin.svg) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/moztemur/swagger-yaml-webpack-plugin/Release)
 
 Swagger Yaml Webpack Plugin provides you to bundle your swagger yaml documentation into your Node.js output code as a globally accessible variable in JSON format during build time so that you can serve that content anyway you wish such as HTTP response.
 
