@@ -1,4 +1,13 @@
-demo
-src
-test
-webpack*.js
+# dependencies
+node_modules
+
+# ci
+.github
+.commitlintrc.yml
+.eslintrc.yml
+.gitignore
+.huskyrc.yml
+.releaserc.yml
+
+# editor
+.editorconfig
