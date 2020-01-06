@@ -6,7 +6,31 @@ on:
       - master
 
 jobs:
+  ci:
+    name: Continuos Integration on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node: [12]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://registry.npmjs.org
+      - name: install
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm test
+
   prepare:
+    needs: ci
     runs-on: ubuntu-latest
     if: "! contains(github.event.head_commit.message, '[skip ci]')"
     steps:
@@ -14,20 +38,15 @@ jobs:
 
   publish:
     needs: prepare
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
-
       - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org
-
       - name: install
         run: npm ci
-
       - name: semantic-release
         run: npx semantic-release
         env:
